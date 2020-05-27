@@ -25,6 +25,9 @@ spec:
       {{- end }}
     spec:
       serviceAccountName: {{ template "minio.serviceAccountName" . }}
+      {{- if .Values.schedulerName }}
+      schedulerName: {{ .Values.schedulerName | quote }}
+      {{- end }}
 {{- include "minio.imagePullSecrets" . | nindent 6 }}
       {{- if .Values.affinity }}
       affinity: {{- include "minio.tplValue" (dict "value" .Values.affinity "context" $) | nindent 8 }}
